@@ -289,52 +289,6 @@ Contributions are welcome — bug reports, feature requests, and pull requests.
 
 **Issues:** When filing a bug, include the Laravel version, PHP version, a minimal reproduction, and the actual vs expected behavior. For feature requests, describe the use case before the proposed API.
 
-## Releasing (publishing updates to Packagist)
-
-Packagist auto-syncs from GitHub via webhook. Releasing a new version is a tag-and-push workflow:
-
-1. **Make sure `main` is green.** All CI jobs must pass on the commit you intend to tag.
-2. **Pick the next version** following [SemVer](https://semver.org/):
-   - `MAJOR` — breaking public API change
-   - `MINOR` — backward-compatible feature
-   - `PATCH` — backward-compatible bug fix
-3. **Update `CHANGELOG.md`:** move entries from `[Unreleased]` into a new versioned section with today's date:
-   ```markdown
-   ## [1.2.0] - 2026-05-27
-
-   ### Added
-   - ...
-
-   ### Fixed
-   - ...
-   ```
-   Leave an empty `[Unreleased]` block at the top for future entries.
-4. **Commit the changelog:**
-   ```bash
-   git add CHANGELOG.md
-   git commit -m "chore(release): 1.2.0"
-   ```
-5. **Tag the release** (annotated tag, prefixed with `v`):
-   ```bash
-   git tag -a v1.2.0 -m "Release 1.2.0"
-   ```
-6. **Push the commit and the tag:**
-   ```bash
-   git push origin main
-   git push origin v1.2.0
-   ```
-7. **Verify on Packagist:** open https://packagist.org/packages/manusiakemos/laravel-tanstack — the new version should appear within a minute. If it doesn't, the webhook may be broken; trigger a manual sync by clicking **Update** on the package page (requires maintainer login).
-8. **Create a GitHub Release** (optional but recommended) from the tag, pasting the changelog section as the release notes. This drives the release feed and email notifications for watchers.
-
-**First-time setup (only once per package):**
-
-- Submit the package at https://packagist.org/packages/submit using the GitHub repo URL.
-- In the GitHub repo settings, add the Packagist webhook (`https://packagist.org/api/github?username=<your-packagist-username>`) with the Packagist API token, so future tags auto-sync.
-
-**Yanking a broken release:**
-
-If a release is broken, do **not** rewrite the tag. Publish a patch release with the fix and mark the broken version as abandoned on Packagist if necessary.
-
 ## License
 
 MIT.
