@@ -1,0 +1,13 @@
+/vendor
+/node_modules
+composer.lock
+.phpunit.cache
+.phpunit.result.cache
+.idea
+.vscode
+.DS_Store
+*.log
+.env
+build/
+coverage/
+.phpstan-cache
